@@ -1,15 +1,25 @@
-# TODO: insert robot code here
 import magicbot
 import wpilib
 
+from components.agitator import Agitator
+from components.agitatorController import AgitatorController
+
+
 class MyRobot(magicbot.MagicRobot):
-    x: int
+
+    controller: AgitatorController
+    agitator: Agitator
 
     def createObjects(self):
-        '''Create motors and stuff here'''
-        pass
+        self.agitator_motor = wpilib.PWMSparkMax(0)
+        self.driver_controller = wpilib.XboxController(0)
 
     def teleopInit(self):
-        '''Called when teleop starts; optional'''
+        pass
 
     def teleopPeriodic(self):
+        try:
+            if self.driver_controller.getAButton():
+                self.controller.agitate()
+        except:
+            self.onException()
