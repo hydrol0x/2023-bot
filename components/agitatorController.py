@@ -1,5 +1,5 @@
 from magicbot import StateMachine, state
-from agitator import Agitator
+from components.agitator import Agitator
 
 
 class AgitatorController(StateMachine):
